@@ -5,11 +5,23 @@ const getAllDepartments = () => {
 
     db.query(sql, (err, row) => {
         if (err) {
-            console.log(err)
+            console.log(err);
+            return;
         }
-        console.table(row)
+        console.table(row);
     });
-
 };
 
-module.exports = {getAllDepartments};
+const addDepartment = departmentInput => {
+    const sql = `INSERT INTO departments (name) VALUES (?)`;
+
+    db.query(sql, departmentInput.name, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log('Department successfully added');
+    });
+};
+
+module.exports = {getAllDepartments, addDepartment};
